@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:flutter_example_app/utils/utils.dart';
 
@@ -21,5 +20,30 @@ class Task extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, title, time, date, note, category, isCompleted];
+  List<Object?> get props =>
+      [id, title, time, date, note, category, isCompleted];
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      TaskKeys.id: id,
+      TaskKeys.title: title,
+      TaskKeys.note: note,
+      TaskKeys.time: time,
+      TaskKeys.date: date,
+      TaskKeys.category: category.name,
+      TaskKeys.isCompleted: isCompleted,
+    };
+  }
+
+  factory Task.fromJson(Map<String, dynamic> map) {
+    return Task(
+      id: map[TaskKeys.id] != null ? map['id'] as int : null,
+      title: map[TaskKeys.title],
+      note: map[TaskKeys.note],
+      time: map[TaskKeys.time],
+      date: map[TaskKeys.date],
+      category: TaskCategory.stringToTaskCategory(map[TaskKeys.category]),
+      isCompleted: map[TaskKeys.isCompleted] as bool,
+    );
+  }
 }

@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+
 import 'package:flutter_example_app/utils/utils.dart';
 
 class Task extends Equatable {
@@ -31,7 +33,7 @@ class Task extends Equatable {
       TaskKeys.time: time,
       TaskKeys.date: date,
       TaskKeys.category: category.name,
-      TaskKeys.isCompleted: isCompleted,
+      TaskKeys.isCompleted: isCompleted ? 1 : 0,
     };
   }
 
@@ -43,7 +45,27 @@ class Task extends Equatable {
       time: map[TaskKeys.time],
       date: map[TaskKeys.date],
       category: TaskCategory.stringToTaskCategory(map[TaskKeys.category]),
-      isCompleted: map[TaskKeys.isCompleted] as bool,
+      isCompleted: map[TaskKeys.isCompleted] == 1 ? true : false,
+    );
+  }
+
+  Task copyWith({
+    int? id,
+    String? title,
+    String? note,
+    String? time,
+    String? date,
+    TaskCategory? category,
+    bool? isCompleted,
+  }) {
+    return Task(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      note: note ?? this.note,
+      time: time ?? this.time,
+      date: date ?? this.date,
+      category: category ?? this.category,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 }

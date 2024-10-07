@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example_app/config/routes/router.dart';
-import 'package:flutter_example_app/data/models/models.dart';
+import 'package:flutter_example_app/data/data.dart';
+import 'package:flutter_example_app/providers/providers.dart';
 import 'package:flutter_example_app/utils/utils.dart';
 import 'package:flutter_example_app/widgets/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   static HomeScreen builder(BuildContext context, GoRouterState state) =>
       const HomeScreen();
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.colorScheme;
     final deviceSize = context.deviceSize;
+    final taskState = ref.watch(taskProvider);
+    final completedTasks = _completedTasks(taskState.tasks, ref);
+    final uncompletedTasks = _uncompletedTasks(taskState.tasks, ref);
+    final selectedDate = ref.watch(dateProvider);
     return Scaffold(
       body: Stack(
         children: [
@@ -24,16 +31,20 @@ class HomeScreen extends StatelessWidget {
                 height: deviceSize.height * 0.3,
                 width: deviceSize.width,
                 color: colors.primary,
-                child: const Center(
+                child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      DisplayWhiteText(
-                          text: 'October 4, 2024',
+                      InkWell(
+                        onTap: () => Helpers.selectedDate(context, ref),
+                        child: DisplayWhiteText(
+                          text: DateFormat.yMMMd().format(selectedDate),
                           fontSize: 20,
-                          fontWeight: FontWeight.normal),
-                      Gap(10),
-                      DisplayWhiteText(
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      const Gap(10),
+                      const DisplayWhiteText(
                         text: 'My Todo List',
                         fontSize: 40,
                       ),
@@ -60,33 +71,8 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const DisplayListOfTasks(
-                      tasks: [
-                        Task(
-                          title: 'Hacer ejercicios',
-                          time: '08:00',
-                          date: 'Set, 04',
-                          note: 'note',
-                          category: TaskCategory.shopping,
-                          isCompleted: false,
-                        ),
-                        Task(
-                          title: 'Fornicar',
-                          time: '08:00',
-                          date: 'Set, 04',
-                          note: 'note',
-                          category: TaskCategory.personal,
-                          isCompleted: false,
-                        ),
-                        Task(
-                          title: 'Comer',
-                          time: '08:00',
-                          date: 'Set, 04',
-                          note: 'note',
-                          category: TaskCategory.travel,
-                          isCompleted: false,
-                        )
-                      ],
+                    DisplayListOfTasks(
+                      tasks: uncompletedTasks,
                     ),
                     const Gap(20),
                     Text(
@@ -94,33 +80,8 @@ class HomeScreen extends StatelessWidget {
                       style: context.textTheme.headlineMedium,
                     ),
                     const Gap(20),
-                    const DisplayListOfTasks(
-                      tasks: [
-                        Task(
-                          title: 'Trabajar',
-                          time: '08:00',
-                          date: 'Set, 04',
-                          note: 'note',
-                          category: TaskCategory.health,
-                          isCompleted: true,
-                        ),
-                        Task(
-                          title: 'Codear a full ',
-                          time: '08:00',
-                          date: 'Set, 04',
-                          note: 'note',
-                          category: TaskCategory.education,
-                          isCompleted: true,
-                        ),
-                        Task(
-                          title: 'Hacer , ejercicios, ejercicios,ejercicios',
-                          time: '08:00',
-                          date: 'Set, 04',
-                          note: 'note',
-                          category: TaskCategory.home,
-                          isCompleted: true,
-                        )
-                      ],
+                    DisplayListOfTasks(
+                      tasks: completedTasks,
                       isCompletedTasks: true,
                     ),
                     const Gap(20),
@@ -140,4 +101,22 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  List<Task> _completedTasks(List<Task> tasks, WidgetRef ref) {
+    final selectedDate = ref.watch(dateProvider);
+    return tasks.where((task) {
+      final isTaskDay = Helpers.isTaskFromSelectedDate(task, selectedDate);
+      return task.isCompleted && isTaskDay;
+    }).toList();
+  }
+
+  List<Task> _uncompletedTasks(List<Task> tasks, WidgetRef ref) {
+    final selectedDate = ref.watch(dateProvider);
+    return tasks.where((task) {
+      final isTaskDay = Helpers.isTaskFromSelectedDate(task, selectedDate);
+      return !task.isCompleted && isTaskDay;
+    }).toList();
+  }
+
+
 }

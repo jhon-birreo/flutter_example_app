@@ -10,10 +10,10 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-class HomeScreen extends ConsumerWidget {
-  static HomeScreen builder(BuildContext context, GoRouterState state) =>
-      const HomeScreen();
-  const HomeScreen({super.key});
+class TodoListScreen extends ConsumerWidget {
+  static TodoListScreen builder(BuildContext context, GoRouterState state) =>
+      const TodoListScreen();
+  const TodoListScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

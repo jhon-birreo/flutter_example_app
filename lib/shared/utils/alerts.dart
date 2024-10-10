@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_example_app/features/todo_app/data/models/models.dart';
 import 'package:flutter_example_app/features/todo_app/presentation/providers/providers.dart';
 import 'package:flutter_example_app/shared/utils/utils.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,7 +22,10 @@ class AppAlerts {
   }
 
   static Future<void> showDeleteAlertDialog(
-      BuildContext context, WidgetRef ref, TaskModel task) async {
+    BuildContext context,
+    WidgetRef ref,
+    TaskModel task,
+  ) async {
     Widget cancelButton = TextButton(
       onPressed: () {
         Navigator.of(context).pop();

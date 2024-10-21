@@ -16,6 +16,7 @@ final _rootNavigatorProfile =
     GlobalKey<NavigatorState>(debugLabel: 'shellProfile');
 final _rootNavigatorFavorite =
     GlobalKey<NavigatorState>(debugLabel: 'shellFavorite');
+final scaffoldKey = GlobalKey<ScaffoldState>();
 
 final appRouter = [
   GoRoute(
@@ -49,16 +50,8 @@ final navigationBarRoute = StatefulShellRoute.indexedStack(
       routes: [
         GoRoute(
           path: RouteLocation.order,
-          builder: (context, state) => OrderScreen(key: state.pageKey),
-        ),
-      ],
-    ),
-    StatefulShellBranch(
-      navigatorKey: _rootNavigatorProfile,
-      routes: [
-        GoRoute(
-          path: RouteLocation.profile,
-          builder: (context, state) => ProfileScreen(key: state.pageKey),
+          builder: (context, state) =>
+              OrderScreen(key: state.pageKey),
         ),
       ],
     ),
@@ -68,6 +61,16 @@ final navigationBarRoute = StatefulShellRoute.indexedStack(
         GoRoute(
           path: RouteLocation.favorite,
           builder: (context, state) => FavoriteScreen(key: state.pageKey),
+        ),
+      ],
+    ),
+    StatefulShellBranch(
+      navigatorKey: _rootNavigatorProfile,
+      routes: [
+        GoRoute(
+          path: RouteLocation.profile,
+          builder: (context, state) =>
+              ProfileScreen(key: state.pageKey),
         ),
       ],
     )

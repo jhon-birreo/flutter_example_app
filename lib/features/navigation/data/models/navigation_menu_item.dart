@@ -24,15 +24,15 @@ List<NavigationMenuItem> navigationMenuItems = [
     selectedIndex: 0,
   ),
   NavigationMenuItem(
-    title: 'Favorites',
-    icon: Iconsax.heart,
-    route: RouteLocation.todoList,
-    selectedIndex: 1,
-  ),
-  NavigationMenuItem(
     title: 'Orders',
     icon: Iconsax.shopping_cart,
     route: RouteLocation.home,
+    selectedIndex: 1,
+  ),
+  NavigationMenuItem(
+    title: 'Favorites',
+    icon: Iconsax.heart,
+    route: RouteLocation.todoList,
     selectedIndex: 2,
   ),
   NavigationMenuItem(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example_app/core/config/routes/route_location.dart';
 import 'package:flutter_example_app/shared/utils/utils.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -77,10 +79,13 @@ class HomeScreen extends StatelessWidget {
             ];
           },
           body: ListView.separated(
-            itemCount: 25,
+            itemCount: 1,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text('Item ${index + 1}'),
+                title: Text('Todo list ${index + 1}'),
+                onTap: () {
+                  context.go(RouteLocation.todoList);
+                },
               );
             },
             separatorBuilder: (context, index) {

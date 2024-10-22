@@ -92,6 +92,14 @@ class TodoListScreen extends ConsumerWidget {
                         padding: EdgeInsets.all(8.0),
                         child: DisplayWhiteText(text: 'Add New Task'),
                       ),
+                    ),
+                    const Gap(10),
+                    ElevatedButton(
+                      onPressed: () => context.push(RouteLocation.home),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: DisplayWhiteText(text: 'Home'),
+                      ),
                     )
                   ],
                 ),

@@ -7,6 +7,7 @@ import 'package:flutter_example_app/features/profile/presentation/screens/screen
 import 'package:flutter_example_app/features/todo_app/presentation/screens/screens.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../features/parallax/presentation/screens/parallax_screen.dart';
 import 'router.dart';
 
 final navigationKey = GlobalKey<NavigatorState>();
@@ -19,6 +20,7 @@ final _rootNavigatorFavorite =
 final scaffoldKey = GlobalKey<ScaffoldState>();
 
 final appRouter = [
+  navigationBarRoute,
   GoRoute(
     path: RouteLocation.todoList,
     parentNavigatorKey: navigationKey,
@@ -29,7 +31,11 @@ final appRouter = [
     parentNavigatorKey: navigationKey,
     builder: (context, state) => CreateTaskScreen(key: state.pageKey),
   ),
-  navigationBarRoute,
+  GoRoute(
+    path: RouteLocation.parallax,
+    parentNavigatorKey: navigationKey,
+    builder: (context, state) => ParallaxScreen(key: state.pageKey),
+  ),
 ];
 
 final navigationBarRoute = StatefulShellRoute.indexedStack(
@@ -50,8 +56,7 @@ final navigationBarRoute = StatefulShellRoute.indexedStack(
       routes: [
         GoRoute(
           path: RouteLocation.order,
-          builder: (context, state) =>
-              OrderScreen(key: state.pageKey),
+          builder: (context, state) => OrderScreen(key: state.pageKey),
         ),
       ],
     ),
@@ -69,8 +74,7 @@ final navigationBarRoute = StatefulShellRoute.indexedStack(
       routes: [
         GoRoute(
           path: RouteLocation.profile,
-          builder: (context, state) =>
-              ProfileScreen(key: state.pageKey),
+          builder: (context, state) => ProfileScreen(key: state.pageKey),
         ),
       ],
     )

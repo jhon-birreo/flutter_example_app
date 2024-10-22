@@ -79,14 +79,9 @@ class HomeScreen extends StatelessWidget {
             ];
           },
           body: ListView.separated(
-            itemCount: 1,
+            itemCount: _buildListItems(context).length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text('Todo list ${index + 1}'),
-                onTap: () {
-                  context.go(RouteLocation.todoList);
-                },
-              );
+              return _buildListItems(context)[index];
             },
             separatorBuilder: (context, index) {
               return const Divider(
@@ -97,5 +92,23 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // list of items example todo list, parallax, profile, favorites
+  List<Widget> _buildListItems(BuildContext context) {
+    return [
+      ListTile(
+        title: const Text('Todo list'),
+        onTap: () {
+          context.go(RouteLocation.todoList);
+        },
+      ),
+      ListTile(
+        title: const Text('Parallax'),
+        onTap: () {
+          context.go(RouteLocation.parallax);
+        },
+      ),
+    ];
   }
 }

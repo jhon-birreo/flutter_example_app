@@ -1,0 +1,1 @@
+export 'parallax_screen.dart';

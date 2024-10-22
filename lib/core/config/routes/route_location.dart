@@ -7,4 +7,5 @@ class RouteLocation {
   static String get profile => '/profile';
   static String get favorite => '/favorite';
   static String get order => '/order';
+  static String get parallax => '/parallax';
 }

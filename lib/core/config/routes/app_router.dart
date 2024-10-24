@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example_app/features/app_list/presentation/screens/screens.dart';
 import 'package:flutter_example_app/features/favorites/presentation/screens/screens.dart';
 import 'package:flutter_example_app/features/home/presentation/screens/screens.dart';
 import 'package:flutter_example_app/features/navigation/presentation/screens/screens.dart';
 import 'package:flutter_example_app/features/orders/presentation/screens/screens.dart';
 import 'package:flutter_example_app/features/profile/presentation/screens/screens.dart';
-import 'package:flutter_example_app/features/todo_app/presentation/screens/screens.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../features/parallax/presentation/screens/parallax_screen.dart';
+import '../../../features/app_list/presentation/screens/jewelley_screen.dart';
 import 'router.dart';
 
 final navigationKey = GlobalKey<NavigatorState>();
@@ -36,6 +36,11 @@ final appRouter = [
     parentNavigatorKey: navigationKey,
     builder: (context, state) => ParallaxScreen(key: state.pageKey),
   ),
+  GoRoute(
+    path: RouteLocation.jewelleryList,
+    parentNavigatorKey: navigationKey,
+    builder: (context, state) => JewelleryScreen(key: state.pageKey),
+  )
 ];
 
 final navigationBarRoute = StatefulShellRoute.indexedStack(

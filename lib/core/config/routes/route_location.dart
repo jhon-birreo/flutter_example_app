@@ -8,4 +8,5 @@ class RouteLocation {
   static String get favorite => '/favorite';
   static String get order => '/order';
   static String get parallax => '/parallax';
+  static String get jewelleryList => '/jewelleryList';
 }

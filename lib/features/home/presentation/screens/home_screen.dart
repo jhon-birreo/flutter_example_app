@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_example_app/core/config/routes/route_location.dart';
+import 'package:flutter_example_app/features/home/data/models/item_model.dart';
 import 'package:flutter_example_app/shared/utils/utils.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -79,9 +79,14 @@ class HomeScreen extends StatelessWidget {
             ];
           },
           body: ListView.separated(
-            itemCount: _buildListItems(context).length,
+            itemCount: itemList.length,
             itemBuilder: (context, index) {
-              return _buildListItems(context)[index];
+              return ListTile(
+                title: Text(itemList[index].title),
+                onTap: () {
+                  context.go(itemList[index].route);
+                },
+              );
             },
             separatorBuilder: (context, index) {
               return const Divider(
@@ -92,23 +97,5 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  // list of items example todo list, parallax, profile, favorites
-  List<Widget> _buildListItems(BuildContext context) {
-    return [
-      ListTile(
-        title: const Text('Todo list'),
-        onTap: () {
-          context.go(RouteLocation.todoList);
-        },
-      ),
-      ListTile(
-        title: const Text('Parallax'),
-        onTap: () {
-          context.go(RouteLocation.parallax);
-        },
-      ),
-    ];
   }
 }

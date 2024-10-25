@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_example_app/features/home/data/models/item_model.dart';
+import 'package:flutter_example_app/features/home/presentation/delegates/search_delegate.dart';
 import 'package:flutter_example_app/shared/utils/utils.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -51,26 +52,32 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SliverAppBar(
+              SliverAppBar(
                 backgroundColor: Colors.white,
                 pinned: false,
                 floating: true,
                 snap: true,
                 flexibleSpace: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
                         Expanded(
                           child: TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: 'Buscar...',
                             ),
+                            onTap: () {
+                              showSearch(
+                                context: context,
+                                delegate: SearchHomeDelegate(),
+                              );
+                            },
                           ),
                         ),
-                        Gap(20),
-                        Icon(Icons.search),
+                        const Gap(20),
+                        const Icon(Icons.search),
                       ],
                     ),
                   ),

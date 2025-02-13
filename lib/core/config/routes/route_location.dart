@@ -9,4 +9,5 @@ class RouteLocation {
   static String get order => '/order';
   static String get parallax => '/parallax';
   static String get jewelleryList => '/jewelleryList';
+  static String get connectivity => '/connectivity';
 }

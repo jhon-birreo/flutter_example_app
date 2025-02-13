@@ -12,12 +12,12 @@ class ItemModel extends ItemEntity with EquatableMixin {
   String toString() {
     return 'ItemModel{title: $title, route: $route}';
   }
-
 }
 
-  List<ItemModel> itemList = [
-    ItemModel(title: 'Jewellery', route: RouteLocation.jewelleryList),
-    ItemModel(title: 'To-Do List', route: RouteLocation.todoList),
-    ItemModel(title: 'Create Task', route: RouteLocation.createTask),
-    ItemModel(title: 'Parallax', route: RouteLocation.parallax),
-  ];
+List<ItemModel> itemList = [
+  ItemModel(title: 'Jewellery', route: RouteLocation.jewelleryList),
+  ItemModel(title: 'To-Do List', route: RouteLocation.todoList),
+  ItemModel(title: 'Create Task', route: RouteLocation.createTask),
+  ItemModel(title: 'Parallax', route: RouteLocation.parallax),
+  ItemModel(title: 'Network Connectivity', route: RouteLocation.connectivity),
+];

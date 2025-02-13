@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example_app/features/app_list/presentation/screens/check_connectivity_screen.dart';
 import 'package:flutter_example_app/features/app_list/presentation/screens/screens.dart';
 import 'package:flutter_example_app/features/favorites/presentation/screens/screens.dart';
 import 'package:flutter_example_app/features/home/presentation/screens/screens.dart';
@@ -40,6 +41,11 @@ final appRouter = [
     path: RouteLocation.jewelleryList,
     parentNavigatorKey: navigationKey,
     builder: (context, state) => JewelleryScreen(key: state.pageKey),
+  ),
+  GoRoute(
+    path: RouteLocation.connectivity,
+    parentNavigatorKey: navigationKey,
+    builder: (context, state) => ConnectivityScreen(key: state.pageKey),
   )
 ];
 
